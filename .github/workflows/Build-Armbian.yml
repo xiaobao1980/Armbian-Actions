@@ -18,6 +18,7 @@ on:
           - 'nanopi-r3s'
           - 'onecloud'
           - 'station-m2'
+          - 'zyst-2168k'
       BRANCH:
         description: 'Kernel branch'
         default: 'current'
@@ -141,7 +142,7 @@ jobs:
         working-directory: /mnt/workdir
         run: |
           df -hT ${PWD}
-          git clone -q --single-branch --depth=1 --branch=main https://github.com/armbian/build.git build
+          git clone -q --single-branch --depth=1 --branch=main https://github.com/xiaobao1980/armbian-build.git build
           ln -sf /mnt/workdir/build ${GITHUB_WORKSPACE}/build
 
       - name: Apply patches
