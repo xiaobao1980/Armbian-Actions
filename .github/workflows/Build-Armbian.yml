@@ -21,7 +21,7 @@ on:
           - 'zyst-2168k'
       BRANCH:
         description: 'Kernel branch'
-        default: 'current'
+        default: 'vendor'
         required: true
         type: choice
         options:
