@@ -42,7 +42,7 @@ usage() {
     echo -e "${INFO}   -u <repo>       指定 GitHub 仓库"
     echo -e "${INFO}   -f              指定 flippy 内核，慎用"
     echo -e "${INFO}   -l              显示仓库内核版本列表 (Top${VERSION_TOP}) ，可组合以下参数："
-    echo -e "${INFO}     -p <prefix>     主版本号，例如 6.15 ，多版本请用空格分隔并加引号，例如 \"6.15 6.16\""
+    echo -e "${INFO}     -p <prefix>     主版本号，例如 6.15 ，多版本请用空格分隔并加引号，例如 \"6.15 6.16\" 或全部 all"
     echo -e "${INFO}     -n <num>        列表数量，例如 10"
     echo -e "${INFO}   -h              显示此帮助信息"
     exit 0
@@ -323,12 +323,16 @@ while getopts "k:lfhu:n:p:" opt; do
             ;;
         p)
             OPTARG=$(echo "${OPTARG}" | xargs)
-            for prefix in ${OPTARG}; do
-                if [[ ! "${prefix}" =~ ^[0-9]+\.[0-9]+$ ]]; then
-                    error "参数 -p 需要主版本号，例如 6.15 ，多版本请用空格分隔并加引号，例如 \"6.15 6.16\""
-                fi
-            done
-            VERSION_PREFIXES="${OPTARG}"
+            if [[ "${OPTARG}" == "all" ]]; then
+                VERSION_PREFIXES="6.1 6.6 6.12 6.15 6.16 6.17 6.18 6.19 6.20"
+            else
+                for prefix in ${OPTARG}; do
+                    if [[ ! "${prefix}" =~ ^[0-9]+\.[0-9]+$ ]]; then
+                        error "参数 -p 需要主版本号，例如 6.15 ，多版本请用空格分隔并加引号，例如 \"6.15 6.16\" 或全部 all"
+                    fi
+                done
+                VERSION_PREFIXES="${OPTARG}"
+            fi
             ;;
         u)
             GITHUB_REPO="${OPTARG}"

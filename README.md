@@ -55,7 +55,7 @@
 ## 🔧 其他修改
 - 移除内核版本后缀信息
 - 补全 **cpuinfo** 中的 **model name** 信息
-- **Aml-s9xx-box** 固件默认适配 **斐讯 N1 盒子** ( 直接解压写入 U 盘即可 )
+- **Aml-s9xx-box** 固件默认适配 **斐讯 N1 盒子** ( 直接解压写入 U 盘即可 ) ，写入 **EMMC** 脚本在 /root 目录
 - 新增命令工具：
   - `armbian-apt`、`armbian-update`、`armbian-sync`
     - [功能截图](https://github.com/Zane-E/Armbian-Actions/blob/main/screenshot/screenshot.png)
@@ -80,7 +80,7 @@
 | :------: | :------: | :------: | :------: |
 | **Target board** | 目标设备型号 | `nanopct4` | `nanopct4` `rock-5c` `aml-s9xx-box` `编辑文件添加` { [设备列表](https://github.com/armbian/build/tree/main/config/boards) } |
 | **Kernel branch** | 内核版本选择 | `current` | `current`（稳定版） `edge`（测试版） `vendor`（定制版），参考 [设备列表](https://github.com/armbian/build/tree/main/config/boards) 文件中 `KERNEL_TARGET` 定义 |
-| **Linux release** | 系统发行版 | `bookworm` | `bookworm`（Debian 12） `trixie`（Debian 13） `jammy`（Ubuntu 22.04） `noble`（Ubuntu 24.04） |
+| **Linux release** | 系统发行版 | `trixie` | `trixie`（Debian 13） `bookworm`（Debian 12） `noble`（Ubuntu 24.04） `jammy`（Ubuntu 22.04） |
 | **Build desktop** | 桌面版固件 | `no` | `yes`（带桌面环境） `no`（纯命令行） |
 | **Build minimal** | 最小化系统 | `yes` | `yes`（轻量化） `no`（完整系统） |
 | **Build with docker** | 容器环境构建 | `no` | `yes`（容器构建） `no`（本地构建） |

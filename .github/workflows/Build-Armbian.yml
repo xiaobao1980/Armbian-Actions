@@ -30,14 +30,14 @@ on:
           - 'vendor'
       RELEASE:
         description: 'Linux release'
-        default: 'bookworm'
+        default: 'trixie'
         required: true
         type: choice
         options:
-          - 'bookworm'
           - 'trixie'
-          - 'jammy'
+          - 'bookworm'
           - 'noble'
+          - 'jammy'
       BUILD_DESKTOP:
         description: 'Build desktop'
         default: 'no'
