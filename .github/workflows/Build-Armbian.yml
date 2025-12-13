@@ -10,10 +10,13 @@ on:
         type: choice
         options:
           - 'cm3588'
+          - 'h96-m9'
+          - 'h96-tvbox-3566'
+          - 'neardi-lz120'
+          - 'neardi-lz1200'
           - 'nanopct4'
           - 'rock-5c'
           - 'panther-x2'
-          - 'aml-s9xx-box'
           - 'radxa-cubie-a5e'
           - 'jp-tvbox'
           - 'lubancat-2n'
