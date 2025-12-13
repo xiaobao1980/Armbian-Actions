@@ -6,28 +6,21 @@ on:
       BOARD:
         description: 'Target board'
         required: true
-     #   default: 'nanopct4'
+        default: 'nanopct4'
         type: choice
         options:
-          - 'cm3588-nas'
-          - 'h96-m9'
-          - 'h96-tvbox-3566'
-          - 'neardi-lz120'
-          - 'neardi-lz1200'
           - 'nanopct4'
           - 'rock-5c'
           - 'panther-x2'
+          - 'aml-s9xx-box'
           - 'radxa-cubie-a5e'
           - 'jp-tvbox'
-          - 'lubancat-2n'
           - 'nanopi-r3s'
           - 'onecloud'
-          - 'roc-k50s'
           - 'station-m2'
-          - 'zyst-2168k'
       BRANCH:
         description: 'Kernel branch'
-        default: 'vendor'
+        default: 'current'
         required: true
         type: choice
         options:
@@ -148,7 +141,6 @@ jobs:
         working-directory: /mnt/workdir
         run: |
           df -hT ${PWD}
-        #  git clone -q --single-branch --depth=1 --branch=main https://github.com/armbian/build.git build
           git clone -q --single-branch --depth=1 --branch=main https://github.com/xiaobao1980/armbian-build.git build
           ln -sf /mnt/workdir/build ${GITHUB_WORKSPACE}/build
 
