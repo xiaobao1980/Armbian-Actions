@@ -9,14 +9,17 @@ on:
         default: 'nanopct4'
         type: choice
         options:
+          - 'cm3588'
           - 'nanopct4'
           - 'rock-5c'
           - 'panther-x2'
           - 'aml-s9xx-box'
           - 'radxa-cubie-a5e'
           - 'jp-tvbox'
+          - 'lubancat-2n'
           - 'nanopi-r3s'
           - 'onecloud'
+          - 'roc-k50s'
           - 'station-m2'
           - 'zyst-2168k'
       BRANCH:
