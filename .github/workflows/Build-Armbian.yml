@@ -9,7 +9,7 @@ on:
      #   default: 'nanopct4'
         type: choice
         options:
-          - 'cm3588'
+          - 'cm3588-nas'
           - 'h96-m9'
           - 'h96-tvbox-3566'
           - 'neardi-lz120'
