@@ -6,7 +6,7 @@ on:
       BOARD:
         description: 'Target board'
         required: true
-        default: 'nanopct4'
+     #   default: 'nanopct4'
         type: choice
         options:
           - 'cm3588'
