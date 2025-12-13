@@ -28,7 +28,7 @@ on:
           - 'station-m2'
       BRANCH:
         description: 'Kernel branch'
-        default: 'current'
+        default: 'vendor'
         required: true
         type: choice
         options:
