@@ -15,7 +15,7 @@ on:
           - 'meson'
       BRANCH:
         description: 'Linux Branch'
-        default: 'flippy'
+        default: 'current'
         required: true
         type: choice
         options:
