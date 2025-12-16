@@ -12,36 +12,42 @@ fi
 
 # Add Flippy BRANCH
 if [[ "${BRANCH}" =~ ^(flippy)$ ]]; then
-  sed -i '/case \$BRANCH in/a \
-	flippy)\n\
-		BOOTSCRIPT='"'"'boot-rk35xx.cmd:boot.cmd'"'"'\n\
-		BOOTDIR='"'"'u-boot-rockchip64'"'"'\n\
-		declare -g KERNEL_MAJOR_MINOR="6.1"    # Major and minor versions of this kernel.\n\
-		declare -g -i KERNEL_GIT_CACHE_TTL=120 # 2 minutes; this is a high-traffic repo\n\
-		KERNELSOURCE='"'"'https://github.com/unifreq/linux-6.1.y-rockchip.git'"'"'\n\
-		KERNELBRANCH='"'"'branch:main'"'"'\n\
-		KERNELPATCHDIR='"'"'rk35xx-vendor-6.1'"'"'\n\
-		;;' config/sources/families/rk35xx.conf
+  sed -i '0,/case \$BRANCH in/{
+	/case \$BRANCH in/a\
+	flippy)\
+		BOOTSCRIPT='"'"'boot-rk35xx.cmd:boot.cmd'"'"'\
+		BOOTDIR='"'"'u-boot-rockchip64'"'"'\
+		declare -g KERNEL_MAJOR_MINOR="6.1"    # Major and minor versions of this kernel.\
+		declare -g -i KERNEL_GIT_CACHE_TTL=120 # 2 minutes; this is a high-traffic repo\
+		KERNELSOURCE='"'"'https://github.com/unifreq/linux-6.1.y-rockchip.git'"'"'\
+		KERNELBRANCH='"'"'branch:main'"'"'\
+		KERNELPATCHDIR='"'"'rk35xx-vendor-6.1'"'"'\
+		;; 
+		}' config/sources/families/rk35xx.conf
 
-  sed -i '/case \$BRANCH in/a \
-	flippy)\n\
-		BOOTSCRIPT='"'"'boot-rk35xx.cmd:boot.cmd'"'"'\n\
-		BOOTDIR='"'"'u-boot-rockchip64'"'"'\n\
-		declare -g KERNEL_MAJOR_MINOR="6.1"    # Major and minor versions of this kernel.\n\
-		declare -g -i KERNEL_GIT_CACHE_TTL=120 # 2 minutes; this is a high-traffic repo\n\
-		KERNELSOURCE='"'"'https://github.com/unifreq/linux-6.1.y-rockchip.git'"'"'\n\
-		KERNELBRANCH='"'"'branch:main'"'"'\n\
-		KERNELPATCHDIR='"'"'rk35xx-vendor-6.1'"'"'\n\
-		LINUXFAMILY=rk35xx\n\
-		;;' config/sources/families/rockchip-rk3588.conf
+  sed -i '0,/case \$BRANCH in/{
+	/case \$BRANCH in/a\
+	flippy)\
+		BOOTSCRIPT='"'"'boot-rk35xx.cmd:boot.cmd'"'"'\
+		BOOTDIR='"'"'u-boot-rockchip64'"'"'\
+		declare -g KERNEL_MAJOR_MINOR="6.1"    # Major and minor versions of this kernel.\
+		declare -g -i KERNEL_GIT_CACHE_TTL=120 # 2 minutes; this is a high-traffic repo\
+		KERNELSOURCE='"'"'https://github.com/unifreq/linux-6.1.y-rockchip.git'"'"'\
+		KERNELBRANCH='"'"'branch:main'"'"'\
+		KERNELPATCHDIR='"'"'rk35xx-vendor-6.1'"'"'\
+		LINUXFAMILY=rk35xx\
+		;; 
+		}' config/sources/families/rockchip-rk3588.conf
 
-  sed -i '/case \$BRANCH in/a \
-	flippy)\n\
-		declare -g KERNEL_MAJOR_MINOR="6.12"    # Major and minor versions of this kernel.\n\
-		declare -g -i KERNEL_GIT_CACHE_TTL=120 # 2 minutes; this is a high-traffic repo\n\
-		KERNELSOURCE='"'"'https://github.com/unifreq/linux-6.12.y.git'"'"'\n\
-		KERNELBRANCH='"'"'branch:main'"'"'\n\
-		;;' config/sources/families/include/meson64_common.inc
+  sed -i '0,/case \$BRANCH in/{
+	/case \$BRANCH in/a\
+	flippy)\
+		declare -g KERNEL_MAJOR_MINOR="6.12"    # Major and minor versions of this kernel.\
+		declare -g -i KERNEL_GIT_CACHE_TTL=120 # 2 minutes; this is a high-traffic repo\
+		KERNELSOURCE='"'"'https://github.com/unifreq/linux-6.12.y.git'"'"'\
+		KERNELBRANCH='"'"'branch:main'"'"'\
+		;; 
+		}' config/sources/families/include/meson64_common.inc
 
   sed -i '0,/case \$BRANCH in/{
 	/case \$BRANCH in/a\
