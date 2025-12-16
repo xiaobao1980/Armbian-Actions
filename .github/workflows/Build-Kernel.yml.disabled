@@ -1,4 +1,4 @@
-name: Build Kernel New
+name: Build Kernel
 
 on:
   workflow_dispatch:
@@ -15,14 +15,13 @@ on:
           - 'meson'
       BRANCH:
         description: 'Linux Branch'
-        default: 'flippy'
+        default: 'current'
         required: true
         type: choice
         options:
           - 'current'
           - 'edge'
           - 'vendor'
-          - 'flippy'
 
 env:
   TZ: Asia/Shanghai
@@ -30,8 +29,6 @@ env:
 jobs:
   Build-Kernel:
     runs-on: ubuntu-24.04-arm
-    env:
-      BRANCH: ${{ inputs.BRANCH }}
     steps:
       - name: Check input combination
         run: |
@@ -40,22 +37,26 @@ jobs:
           echo "BRANCH: ${{ inputs.BRANCH }}"
           case "${{ inputs.LinuxFamily }}" in
             rk35xx)
-              if [[ ! "${{ inputs.BRANCH }}" =~ ^(vendor|flippy)$ ]]; then
-                echo "rk35xx only supports vendor and flippy branches."
+              if [ "${{ inputs.BRANCH }}" != "vendor" ]; then
+                echo "rk35xx only supports vendor branch."
                 exit 1
               fi
               ;;
             meson)
-              if [[ ! "${{ inputs.BRANCH }}" =~ ^(current)$ ]]; then
+              if [ "${{ inputs.BRANCH }}" != "current" ]; then
                 echo "meson only supports current branch."
                 exit 1
               fi
               ;;
             rockchip64|meson64)
-              if [[ "${{ inputs.BRANCH }}" =~ ^(vendor)$ ]]; then
+              if [ "${{ inputs.BRANCH }}" = "vendor" ]; then
                 echo "${{ inputs.LinuxFamily }} does not support vendor branch."
                 exit 1
               fi
+              ;;
+            *)
+              echo "Unsupported LinuxFamily: ${{ inputs.LinuxFamily }}"
+              exit 1
               ;;
           esac
 
@@ -124,8 +125,7 @@ jobs:
             rk35xx)     BoardFamily="rock-5c" ;;
             meson)      BoardFamily="onecloud" ;;
           esac
-          [ "${{ inputs.BRANCH }}" = "flippy" ] && EXTRA_ARGS="EXTRAWIFI=no DISABLE_KERNEL_PATCHES=yes" || EXTRA_ARGS=""
-          ./compile.sh kernel BOARD=${BoardFamily} BRANCH=${{ inputs.BRANCH }} PREFER_DOCKER=no DOCKER_ARMBIAN_BASE_IMAGE=ubuntu:noble DEB_COMPRESS=xz SHARE_LOG=yes ${EXTRA_ARGS}
+          ./compile.sh kernel BOARD=${BoardFamily} BRANCH=${{ inputs.BRANCH }} PREFER_DOCKER=no DOCKER_ARMBIAN_BASE_IMAGE=ubuntu:noble DEB_COMPRESS=xz SHARE_LOG=yes
 
       - name: Prepare Kernel Metadata
         working-directory: /mnt/workdir/build/output/debs
@@ -138,7 +138,6 @@ jobs:
             echo "KERNEL_VERSION=${KERNEL_VERSION}" >> ${GITHUB_ENV}
             echo "KERNEL_VERSION: ${KERNEL_VERSION}"
             LINUX_FAMILY=$(echo "${Kernel_File}" | cut -d '_' -f 1 | awk -F '-' '{print $NF}')
-            [ "${{ inputs.BRANCH }}" = "flippy" ] && LINUX_FAMILY="${LINUX_FAMILY}-flippy"
             echo "LINUX_FAMILY=${LINUX_FAMILY}" >> ${GITHUB_ENV}
             echo "LINUX_FAMILY: ${LINUX_FAMILY}"
           else
